@@ -1,10 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { v1Router } from '../routes'
 import bodyParser from 'body-parser'
 import AppConfig from '../config'
 import session from 'express-session'
+import userRoutes from '../routes/userRoutes'
+import discussionRoutes from '../routes/discussionRoutes'
+import healthRoute from '../routes/healthRoute'
 
 dotenv.config()
 
@@ -29,6 +31,8 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(bodyParser.json({ limit: AppConfig.BODY_PARSER_LIMIT }))
 
-app.use('/api/v1', v1Router)
+app.use('/api/users', userRoutes)
+app.use('/api/discussions', discussionRoutes)
+app.use('/api/healthcheck', healthRoute)
 
 export default app
