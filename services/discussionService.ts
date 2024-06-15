@@ -51,7 +51,9 @@ export class DiscussionService {
   static async listDiscussionsByTags(tags: string[]): Promise<IDiscussion[]> {
     try {
       await clientPromise
-      const discussions = await Discussion.find({ hashtags: { $in: tags } })
+      const discussions = await Discussion.find({
+        hashtags: { $in: tags },
+      }).exec()
       return discussions
     } catch (error: any) {
       console.error('Error:', error)
