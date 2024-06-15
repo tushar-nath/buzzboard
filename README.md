@@ -83,7 +83,7 @@ Buzz Board is a social media platform where users can create discussions, share 
 
 ## Hosted Postman API Collection
 
-A hosted public Postman API collection is available for easy testing and exploration of the API endpoints: [Buzz Board API Collection]([https://www.postman.com/your-workspace/collection/YOUR_COLLECTION_ID](https://www.postman.com/restless-moon-196183/workspace/buzzboard/collection/24997979-9bcb7e0c-6154-46c3-a57c-f7ea8ef8b786?action=share&creator=24997979))
+A hosted public Postman API collection is available for easy testing and exploration of the API endpoints: [Buzz Board API Collection](https://www.postman.com/restless-moon-196183/workspace/buzzboard/collection/24997979-9bcb7e0c-6154-46c3-a57c-f7ea8ef8b786?action=share&creator=24997979)
 
 ## Low-Level Design Document
 
