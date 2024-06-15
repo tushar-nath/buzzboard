@@ -6,6 +6,7 @@ export interface IUser extends Document {
   email: string
   password: string
   followers: Schema.Types.ObjectId[]
+  following: Schema.Types.ObjectId[]
 }
 
 export interface IDiscussion extends Document {

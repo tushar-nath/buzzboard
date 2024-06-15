@@ -90,18 +90,35 @@ export class UserService {
     }
   }
 
-  static async followUser(userId: string, followUserId: string) {
+  static async followUser(
+    userId: string,
+    followUserId: string
+  ): Promise<IUser | null> {
     try {
-      await clientPromise
       const userObjectId = new Types.ObjectId(userId)
       const followUserObjectId = new Types.ObjectId(followUserId)
 
+      if (userId === followUserId) {
+        throw new Error('Users cannot follow themselves')
+      }
+
       const user = await User.findById(userObjectId)
       const followUser = await User.findById(followUserObjectId)
-      if (!user || !followUser) throw new Error('User not found')
 
-      user.followers.push(followUserObjectId as any)
+      if (!user || !followUser) {
+        throw new Error('User not found')
+      }
+
+      if (user.following.includes(followUserObjectId as any)) {
+        throw new Error('User is already followed')
+      }
+
+      user.following.push(followUserObjectId as any)
+      followUser.followers.push(userObjectId as any)
+
       await user.save()
+      await followUser.save()
+
       return user
     } catch (error: any) {
       console.error('Error:', error)
