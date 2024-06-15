@@ -1,3 +1,4 @@
+import clientPromise from '../lib/mongo'
 import Discussion from '../models/discussionModel'
 import { IDiscussion } from '../types'
 
@@ -9,6 +10,7 @@ export class DiscussionService {
     author: string
   ): Promise<IDiscussion> {
     try {
+      await clientPromise
       const discussion = new Discussion({ text, image, hashtags, author })
       const savedDiscussion = await discussion.save()
       return savedDiscussion
@@ -23,6 +25,7 @@ export class DiscussionService {
     updates: Partial<IDiscussion>
   ): Promise<IDiscussion | null> {
     try {
+      await clientPromise
       const discussion = await Discussion.findByIdAndUpdate(
         discussionId,
         updates,
@@ -37,6 +40,7 @@ export class DiscussionService {
 
   static async deleteDiscussion(discussionId: string): Promise<void> {
     try {
+      await clientPromise
       await Discussion.findByIdAndDelete(discussionId)
     } catch (error: any) {
       console.error('Error:', error)
@@ -46,6 +50,7 @@ export class DiscussionService {
 
   static async listDiscussionsByTags(tags: string[]): Promise<IDiscussion[]> {
     try {
+      await clientPromise
       const discussions = await Discussion.find({ hashtags: { $in: tags } })
       return discussions
     } catch (error: any) {
@@ -56,8 +61,26 @@ export class DiscussionService {
 
   static async listDiscussionsByText(text: string): Promise<IDiscussion[]> {
     try {
+      await clientPromise
       const discussions = await Discussion.find({ text: new RegExp(text, 'i') })
       return discussions
+    } catch (error: any) {
+      console.error('Error:', error)
+      throw error
+    }
+  }
+
+  static async incrementViewCount(
+    discussionId: string
+  ): Promise<IDiscussion | null> {
+    try {
+      await clientPromise
+      const discussion = await Discussion.findByIdAndUpdate(
+        discussionId,
+        { $inc: { viewCount: 1 } },
+        { new: true }
+      )
+      return discussion
     } catch (error: any) {
       console.error('Error:', error)
       throw error

@@ -9,6 +9,7 @@ const discussionSchema = new Schema<IDiscussion>({
   author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  viewCount: { type: Number, default: 0 },
 })
 
 const Discussion = model<IDiscussion>('Discussion', discussionSchema)

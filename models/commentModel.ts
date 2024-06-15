@@ -10,7 +10,7 @@ const commentSchema = new Schema<IComment>({
     required: true,
   },
   likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  createdOn: { type: Date, default: Date.now },
+  replies: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 })
 
 const Comment = model<IComment>('Comment', commentSchema)

@@ -7,6 +7,7 @@ import session from 'express-session'
 import userRoutes from '../routes/userRoutes'
 import discussionRoutes from '../routes/discussionRoutes'
 import healthRoute from '../routes/healthRoute'
+import commentRoutes from '../routes/commentRoutes'
 
 dotenv.config()
 
@@ -34,5 +35,6 @@ app.use(bodyParser.json({ limit: AppConfig.BODY_PARSER_LIMIT }))
 app.use('/api/users', userRoutes)
 app.use('/api/discussions', discussionRoutes)
 app.use('/api/healthcheck', healthRoute)
+app.use('/api/comments', commentRoutes)
 
 export default app

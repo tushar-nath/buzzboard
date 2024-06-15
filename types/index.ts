@@ -16,6 +16,7 @@ export interface IDiscussion extends Document {
   author: Schema.Types.ObjectId
   likes: Schema.Types.ObjectId[]
   comments: Schema.Types.ObjectId[]
+  viewCount: number
 }
 
 export interface IComment extends Document {
@@ -23,5 +24,15 @@ export interface IComment extends Document {
   author: Schema.Types.ObjectId
   discussion: Schema.Types.ObjectId
   likes: Schema.Types.ObjectId[]
-  createdOn: Date
+  replies: Schema.Types.ObjectId[]
+}
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id: string
+    email: string
+  }
+}
+
+declare module 'express-serve-static-core' {
+  export interface Request extends AuthenticatedRequest {}
 }

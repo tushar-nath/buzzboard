@@ -69,4 +69,17 @@ export class Discussions {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async incrementViewCount(req: Request, res: Response) {
+    try {
+      const discussionId = req.params.id
+      const discussion = await DiscussionService.incrementViewCount(
+        discussionId
+      )
+      res.status(200).json({ discussion })
+    } catch (error: any) {
+      console.error('Error:', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }
