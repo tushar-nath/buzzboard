@@ -48,6 +48,17 @@ export class DiscussionService {
     }
   }
 
+  static async listDiscussions(): Promise<IDiscussion[]> {
+    try {
+      await clientPromise
+      const discussions = await Discussion.find()
+      return discussions
+    } catch (error: any) {
+      console.error('Error:', error)
+      throw error
+    }
+  }
+
   static async listDiscussionsByTags(tags: string[]): Promise<IDiscussion[]> {
     try {
       await clientPromise

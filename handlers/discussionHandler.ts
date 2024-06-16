@@ -44,6 +44,16 @@ export class Discussions {
     }
   }
 
+  static async listDiscussions(req: Request, res: Response) {
+    try {
+      const discussions = await DiscussionService.listDiscussions()
+      res.status(200).json({ discussions })
+    } catch (error: any) {
+      console.error('Error:', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
+
   static async listDiscussionsByTags(req: Request, res: Response) {
     try {
       const { tags } = req.query
