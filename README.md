@@ -46,7 +46,7 @@ Buzz Board is a social media platform where users can create discussions, share 
    `JWT_SECRET=your_jwt_secret`
 
 4. **Start the server:**
-   `npm start`
+   `npm run start:dev`
    The server will be running at `http://localhost:3000`.
 
 ## API Documentation
